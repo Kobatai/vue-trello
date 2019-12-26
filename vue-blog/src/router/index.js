@@ -1,21 +1,24 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import Router from "vue-router";
 import Home from "../views/Home.vue";
+// サインアップページのコンポーネントをインポート
+import SignUp from "../views/SignUp";
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: Home
-  }
-];
-
-const router = new VueRouter({
+export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: Home
+    },
+    {
+      path: "/sign_up",
+      name: "sign_up",
+      component: SignUp
+    }
+  ]
 });
-
-export default router;
