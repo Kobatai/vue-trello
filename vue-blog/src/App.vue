@@ -44,14 +44,14 @@
                 <span>サインイン</span>
               </router-link>
             </div>
-          </div>
-          <div class="navbar-item">
-            <router-link :to="{ name: 'sign_up'}" class="button is-text">
-              <span class="icon">
-                <i class="fas fa-user-plus"></i>
-              </span>
-              <span>サインアップ</span>
-            </router-link>
+            <div class="navbar-item">
+              <router-link :to="{ name: 'sign_up'}" class="button is-text">
+                <span class="icon">
+                  <i class="fas fa-user-plus"></i>
+                </span>
+                <span>サインアップ</span>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
