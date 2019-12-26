@@ -3,7 +3,7 @@
     <section class="hero is-primary">
       <div class="hero-body">
         <div class="container">
-          <h1 class="title">サインアップ</h1>
+          <h1 class="title">サインイン</h1>
         </div>
       </div>
     </section>
@@ -28,7 +28,7 @@
         <div class="field">
           <p class="control">
             <!-- submitボタンのデフォルトの挙動を制御 -->
-            <button class="button is-primary" @click.prevent="signUp">サインイン</button>
+            <button class="button is-primary" @click.prevent="signIn">サインイン</button>
           </p>
         </div>
       </form>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   name: "sign_in",
   data() {
@@ -44,6 +45,19 @@ export default {
       email: null,
       password: null
     };
+  },
+  methods: {
+    signIn() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push({ name: "home" });
+        })
+        .catch(error => {
+          alert(error.message);
+        });
+    }
   }
 };
 </script>
