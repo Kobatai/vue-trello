@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
+// コンポーネントをインポート
 import Home from "../views/Home.vue";
-// サインアップページのコンポーネントをインポート
 import SignUp from "../views/SignUp";
+import SignIn from "../views/SignIn";
 
 Vue.use(Router);
 
@@ -19,6 +20,11 @@ export default new Router({
       path: "/sign_up",
       name: "sign_up",
       component: SignUp
+    },
+    {
+      path: "/sign_in",
+      name: "sing_in",
+      component: SignIn
     }
   ]
 });
