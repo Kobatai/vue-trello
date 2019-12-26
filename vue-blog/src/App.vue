@@ -26,7 +26,7 @@
                 </span>
               </a>
               <div class="navbar-dropdown is-right">
-                <a class="navbar-item">
+                <a class="navbar-item" @click="signOut">
                   <span class="icon">
                     <i class="fas fa-sign-out-alt"></i>
                   </span>
@@ -76,6 +76,12 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       this.user = user;
     });
+  },
+  methods: {
+    async signOut() {
+      await firebase.auth().signOut();
+      this.$router.push({ name: "home" });
+    }
   }
 };
 </script>
