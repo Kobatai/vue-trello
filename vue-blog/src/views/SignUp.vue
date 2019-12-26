@@ -27,7 +27,8 @@
         </div>
         <div class="field">
           <p class="control">
-            <button class="button is-primary" v-on:click="test">サインアップ</button>
+            <!-- submitボタンのデフォルトの挙動を制御 -->
+            <button class="button is-primary" @click.prevent="signUp">サインアップ</button>
           </p>
         </div>
       </form>
@@ -38,7 +39,7 @@
 <script>
 export default {
   name: "sign_up",
-  data:() {
+  data() {
     return {
       email: null,
       password: null
@@ -46,9 +47,7 @@ export default {
   },
   methods: {
     // eventを引数で取得
-    test(event) {
-      // submitボタンのデフォルトの挙動を制御
-      event.preventDefault();
+    signUp(event) {
       alert(`Email: ${this.email}, Password: ${this.password}`);
 
       this.email = null;
