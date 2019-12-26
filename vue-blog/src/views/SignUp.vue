@@ -11,7 +11,7 @@
       <form class="container">
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="email" placeholder="メールアドレス" />
+            <input class="input" type="email" placeholder="メールアドレス" v-model="email" />
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -19,7 +19,7 @@
         </div>
         <div class="field">
           <p class="control has-icons-left">
-            <input class="input" type="password" placeholder="パスワード" />
+            <input class="input" type="password" placeholder="パスワード" v-model="password" />
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -27,7 +27,7 @@
         </div>
         <div class="field">
           <p class="control">
-            <button class="button is-primary">サインアップ</button>
+            <button class="button is-primary" v-on:click="test">サインアップ</button>
           </p>
         </div>
       </form>
@@ -37,6 +37,23 @@
 
 <script>
 export default {
-  name: "sign_up"
+  name: "sign_up",
+  data:() {
+    return {
+      email: null,
+      password: null
+    };
+  },
+  methods: {
+    // eventを引数で取得
+    test(event) {
+      // submitボタンのデフォルトの挙動を制御
+      event.preventDefault();
+      alert(`Email: ${this.email}, Password: ${this.password}`);
+
+      this.email = null;
+      this.password = null;
+    }
+  }
 };
 </script>
