@@ -37,6 +37,8 @@
 </template>
 
 <script>
+// Firebase ライブラリのインポート
+import firebase from "firebase";
 export default {
   name: "sign_up",
   data() {
@@ -46,12 +48,20 @@ export default {
     };
   },
   methods: {
-    // eventを引数で取得
-    signUp(event) {
-      alert(`Email: ${this.email}, Password: ${this.password}`);
-
-      this.email = null;
-      this.password = null;
+    signUp() {
+      // 認証用オブジェクトの取得
+      firebase
+        // ユーザーの新規作成処理
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          // 成功したらTOPページへ遷移
+          this.$router.push({ name: "home" });
+        })
+        .catch(error => {
+          // エラーがあれば表示
+          alert(error.message);
+        });
     }
   }
 };
