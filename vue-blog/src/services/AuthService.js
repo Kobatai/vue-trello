@@ -12,6 +12,7 @@ class AuthService {
   signUp(email, password) {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
+
   signIn(email, password) {
     return this.auth.signInWithEmailAndPassword(email, password);
   }

@@ -75,7 +75,7 @@ export default {
   },
   // vueインスタンス作成時にfirebaseでログインしていればuserに値をセット
   created() {
-    authService.onAuthStateChanged(user => {
+    authService.onStateChanged(user => {
       this.user = user;
     });
   },

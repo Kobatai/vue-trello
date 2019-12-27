@@ -18,7 +18,7 @@ export default {
   // ライフサイクルフック
   // Vueインスタンスが作成された時に実行される
   created() {
-    authService.onAuthStateChanged(user => {
+    authService.onStateChanged(user => {
       this.user = user;
     });
   }
