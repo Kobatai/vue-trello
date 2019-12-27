@@ -7,17 +7,13 @@
         <div class="field">
           <p class="control has-icons-left">
             <input class="input" type="email" placeholder="メールアドレス" v-model="email" />
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
+            <pm-icon class="is-small is-left" name="envelope"></pm-icon>
           </p>
         </div>
         <div class="field">
           <p class="control has-icons-left">
             <input class="input" type="password" placeholder="パスワード" v-model="password" />
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
+            <pm-icon class="is-small is-left" name="lock"></pm-icon>
           </p>
         </div>
         <div class="field">
@@ -33,13 +29,15 @@
 
 <script>
 import pmPageTitle from "@/components/PageTitle";
+import pmIcon from "@/components/Icon";
 
 import { authService } from "@/services/AuthService";
 
 export default {
   name: "sign_up",
   components: {
-    pmPageTitle
+    pmPageTitle,
+    pmIcon
   },
   data() {
     return {
