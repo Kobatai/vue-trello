@@ -1,12 +1,7 @@
 <template>
   <div>
-    <section class="hero is-primary">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">サインアップ</h1>
-        </div>
-      </div>
-    </section>
+    <!-- pm-page-titleにサインアップをtitleで渡す -->
+    <pm-page-title title="サインアップ"></pm-page-title>
     <section class="section">
       <form class="container">
         <div class="field">
@@ -37,10 +32,15 @@
 </template>
 
 <script>
+import pmPageTitle from "@/components/PageTitle";
+
 import { authService } from "@/services/AuthService";
 
 export default {
   name: "sign_up",
+  components: {
+    pmPageTitle
+  },
   data() {
     return {
       email: null,
