@@ -12,3 +12,5 @@ const firebaseConfig = {
 };
 // 設定情報でFirebaseライブラリを初期化
 firebase.initializeApp(firebaseConfig);
+
+export default firebase;
