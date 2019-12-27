@@ -11,7 +11,7 @@
 <script>
 export default {
   name: "pm-icon",
-  props: { name: Srting },
+  props: { name: String },
   // tpl内で読み取れる関数
   // ここではFontawesomeのfaを返す
   computed: {
