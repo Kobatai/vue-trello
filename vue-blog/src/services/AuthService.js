@@ -1,6 +1,6 @@
 import firebase from "./firebase";
 
-class AuthSeivice {
+class AuthService {
   constructor() {
     this.auth = firebase.auth();
   }
