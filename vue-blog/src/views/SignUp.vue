@@ -37,8 +37,8 @@
 </template>
 
 <script>
-// Firebase ライブラリのインポート
-import firebase from "firebase";
+import { authService } from "@/services/AuthService";
+
 export default {
   name: "sign_up",
   data() {
@@ -50,10 +50,9 @@ export default {
   methods: {
     signUp() {
       // 認証用オブジェクトの取得
-      firebase
+      authService
         // ユーザーの新規作成処理
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
+        .signUp(this.email, this.password)
         .then(() => {
           // 成功したらTOPページへ遷移
           this.$router.push({ name: "home" });

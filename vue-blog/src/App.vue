@@ -63,7 +63,9 @@
 </template>
 
 <script>
-import firebase from "firebase";
+// firebaseのサービスクラスをインポート(@は同じディレクトリであるapp/vue-blog/srcという意味)
+import { authService } from "@/services/AuthService";
+
 export default {
   name: "app",
   data() {
@@ -73,13 +75,13 @@ export default {
   },
   // vueインスタンス作成時にfirebaseでログインしていればuserに値をセット
   created() {
-    firebase.auth().onAuthStateChanged(user => {
+    authService.onAuthStateChanged(user => {
       this.user = user;
     });
   },
   methods: {
     async signOut() {
-      await firebase.auth().signOut();
+      await authService.signOut();
       this.$router.push({ name: "home" });
     }
   }

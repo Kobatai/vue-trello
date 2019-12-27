@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import { authService } from "@/services/AuthService";
 
 export default {
   name: "home",
@@ -18,7 +18,7 @@ export default {
   // ライフサイクルフック
   // Vueインスタンスが作成された時に実行される
   created() {
-    firebase.auth().onAuthStateChanged(user => {
+    authService.onAuthStateChanged(user => {
       this.user = user;
     });
   }
