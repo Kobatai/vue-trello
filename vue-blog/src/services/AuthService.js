@@ -21,5 +21,5 @@ class AuthSeivice {
   }
 }
 
-const authService = new authService();
+const authService = new AuthService();
 export { authService };
