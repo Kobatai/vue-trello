@@ -1,61 +1,6 @@
 <template>
   <div id="app">
-    <nav id="nav" class="navbar has-shadow" role="navigation" aria-label="main navigation">
-      <div class="container">
-        <div class="navbar-brand">
-          <router-link to="/" class="navbar-item">Vue-blog</router-link>
-          <a
-            role="button"
-            id="navbar-burger"
-            class="navbar-burger burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbar-links"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-        <div id="navbar-links" class="navbar-menu">
-          <div class="navbar-end" v-if="user">
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                <span class="icon">
-                  <i class="fas fa-user"></i>
-                </span>
-              </a>
-              <div class="navbar-dropdown is-right">
-                <a class="navbar-item" @click="signOut">
-                  <span class="icon">
-                    <i class="fas fa-sign-out-alt"></i>
-                  </span>
-                  <span>サインアウト</span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="navbar-end" v-else>
-            <div class="navbar-item">
-              <router-link :to="{ name: 'sign_in'}" class="button is-text">
-                <span class="icon">
-                  <i class="fas fa-sign-in-alt"></i>
-                </span>
-                <span>サインイン</span>
-              </router-link>
-            </div>
-            <div class="navbar-item">
-              <router-link :to="{ name: 'sign_up'}" class="button is-text">
-                <span class="icon">
-                  <i class="fas fa-user-plus"></i>
-                </span>
-                <span>サインアップ</span>
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <pm-nav-bar :user="user" @sign-out-clicked="signOut"></pm-nav-bar>
     <main>
       <router-view />
     </main>
@@ -66,8 +11,11 @@
 // firebaseのサービスクラスをインポート(@は同じディレクトリであるapp/vue-blog/srcという意味)
 import { authService } from "@/services/AuthService";
 
+import pmNavBar from "@/components/Navbar";
+
 export default {
   name: "app",
+  components: { pmNavBar },
   data() {
     return {
       user: null
