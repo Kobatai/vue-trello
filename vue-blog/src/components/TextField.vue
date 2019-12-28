@@ -3,8 +3,9 @@
     <!-- ラベルの文字列が指定された時だけ表示 -->
     <label class="label" v-if="label">{{ label }}</label>
     <!-- iconが指定された時だけ必要なクラスを設定 -->
+    <!-- v-model="value" は:valueと@inputの組み合わせ -->
     <p class="control" :class="{ 'has-icons-left' : icon }">
-      <input class="input" :type="type" :placeholder="placeholder" :value="value" @input="input" />
+      <input class="input" :type="type" :placeholder="placeholder" :v-model="innerValue" />
       <!-- アイコンが指定されたときだけ表示 -->
       <pm-icon v-if="icon" class="is-small is-left" :name="icon"></pm-icon>
     </p>
@@ -35,12 +36,17 @@ export default {
     value: String,
     icon: String
   },
-  methods: {
-    input(e) {
-      if (e.target.value !== this.value) {
-        this.$emit("input", e.target.value);
+  computed: {
+    innerValue: {
+      get() {
+        return this.value;
+      },
+      // v-modelで更新があればinputイベントを親に発行し変更してもらう
+      set(newValue) {
+        this.$emit("input", newValue);
       }
     }
+  }
   }
 };
 </script>
