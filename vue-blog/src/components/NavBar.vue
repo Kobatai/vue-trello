@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import from pmIcon from "./Icon";
+import pmIcon from "./Icon";
 
 export default {
   name: "pm-nav-bar",

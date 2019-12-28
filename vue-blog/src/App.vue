@@ -11,7 +11,7 @@
 // firebaseのサービスクラスをインポート(@は同じディレクトリであるapp/vue-blog/srcという意味)
 import { authService } from "@/services/AuthService";
 
-import pmNavBar from "@/components/Navbar";
+import pmNavBar from "@/components/NavBar";
 
 export default {
   name: "app",
