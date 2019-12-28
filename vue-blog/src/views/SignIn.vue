@@ -4,19 +4,9 @@
     <pm-page-title title="サインイン"></pm-page-title>
     <section class="section">
       <form class="container">
-        <div class="field">
-          <p class="control has-icons-left">
-            <input class="input" type="email" placeholder="メールアドレス" v-model="email" />
-            <pm-icon class="is-small is-left" name="envelope"></pm-icon>
-          </p>
-        </div>
-        <div class="field">
-          <p class="control has-icons-left">
-            <input class="input" type="password" placeholder="パスワード" v-model="password" />
-            <pm-icon class="is-small is-left" name="lock"></pm-icon>
-          </p>
-        </div>
-        <div class="field">
+        <pm-text-field type="email" placeholder="メールアドレス" icon="envelope" v-model="email"></pm-text-field>
+        <pm-text-field type="password" placeholder="パスワード" icon="lock" v-model="password"></pm-text-field>
+        <div class="field is-grouped">
           <p class="control">
             <!-- submitボタンのデフォルトの挙動を制御 -->
             <button class="button is-primary" @click.prevent="signIn">サインイン</button>
@@ -29,7 +19,7 @@
 
 <script>
 import pmPageTitle from "@/components/PageTitle";
-import pmIcon from "@/components/Icon";
+import pmTextField from "@/components/TextField";
 
 import { authService } from "@/services/AuthService";
 
@@ -38,7 +28,7 @@ export default {
   // 使用するcomponentを宣言
   components: {
     pmPageTitle,
-    pmIcon
+    pmTextField
   },
   data() {
     return {
