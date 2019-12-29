@@ -27,7 +27,7 @@ class UserBookmarkService {
     return userBookmark;
   }
   // ブックマークの登録の関数
-  addBookmark(user. form) {
+  addBookmark(user, form) {
     // ブックマークの登録する時間はサーバーの時間を使用する
     form.bookmarkedAt = firebase.firestore.FieldValue.serverTimestamp();
     // 現在のユーザーのサブコレクションである`bookmarks`に登録する
@@ -39,5 +39,5 @@ class UserBookmarkService {
   }
 }
 
-const UserBookmarkService = new UserBookmarkService();
-export { UserBookmarkService }
+const userBookmarkService = new UserBookmarkService();
+export { userBookmarkService };

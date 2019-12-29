@@ -38,6 +38,9 @@
 import pmPageTitle from "@/components/PageTitle";
 import pmTextField from "@/components/TextField";
 
+import { userService } from "@/services/UserService";
+import { userBookmarkService } from "@/services/UserBookmarkService";
+
 export default {
   name: "bookmark_new",
   components: { pmPageTitle, pmTextField },
@@ -52,8 +55,46 @@ export default {
     };
   },
   methods: {
-    addBookmark() {
-      // TODO: 登録処理を入れる
+    // awaitを使用するためasyncをつける
+    async addBookmark() {
+      this.validateAll();
+
+      const error = this.titleError || this.urlError || this.commentError;
+
+      if (error) {
+        alert("入力値が不正です。");
+        return;
+      }
+
+      const user = await userService.getCurrentUser();
+      // すでに同じurlでブックマークしているかのチェック
+      const userBookmark = await userBookmarkService.getBookmark(
+        user,
+        this.url
+      );
+
+      if (userBookmark != null) {
+        alert("すでに登録されているURLです。");
+        return;
+      }
+
+      const form = {
+        title: this.title,
+        url: this.url,
+        comment: this.comment
+      };
+
+      try {
+        await userBookmarkService.addBookmark(user, form);
+        this.$router.push({ name: "home" });
+      } catch (e) {
+        alert(e.message);
+      }
+    },
+    validateAll() {
+      this.validateTitle(this.title);
+      this.validateUrl(this.url);
+      this.validateComment(this.comment);
     },
     validateTitle(title) {
       this.titleError = null;
