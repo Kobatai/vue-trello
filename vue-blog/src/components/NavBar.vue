@@ -2,21 +2,23 @@
   <nav id="nav" class="navbar has-shadow" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item">Pitmark</router-link>
+        <router-link to="/" class="navbar-item">Vue-blog</router-link>
         <a
           role="button"
           id="navbar-burger"
           class="navbar-burger burger"
+          :class="{ 'is-active': menuExpanded }"
           aria-label="menu"
           aria-expanded="false"
           data-target="navbar-links"
+          @click="onMenuClicked"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
-      <div id="navbar-links" class="navbar-menu">
+      <div id="navbar-links" class="navbar-menu" :class="{ 'is-active': menuExpanded }">
         <div class="navbar-end" v-if="user">
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
@@ -59,11 +61,17 @@ export default {
   name: "pm-nav-bar",
   components: { pmIcon },
   props: {
-    user: Object
+    user: Object,
+    menuExpanded: Boolean
   },
   methods: {
     signOut() {
       this.$emit("sign-out-clicked");
+    },
+    // メニュークリック時の挙動
+    // 現在メニューを開いているかどうかをemitで関数の引数として渡す
+    onMenuClicked() {
+      this.$emit("menu-clicked", this.menuExpanded);
     }
   }
 };

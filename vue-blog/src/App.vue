@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <pm-nav-bar :user="user" @sign-out-clicked="signOut"></pm-nav-bar>
+    <pm-nav-bar
+      :user="user"
+      :menu-expanded="menuExpanded"
+      @sign-out-clicked="signOut"
+      @menu-clicked="switchMenuState"
+    ></pm-nav-bar>
     <main>
       <router-view />
     </main>
@@ -18,7 +23,9 @@ export default {
   components: { pmNavBar },
   data() {
     return {
-      user: null
+      user: null,
+      // menuが開いているかどうかのパラメーター
+      menuExpanded: false
     };
   },
   // vueインスタンス作成時にfirebaseでログインしていればuserに値をセット
@@ -31,6 +38,10 @@ export default {
     async signOut() {
       await authService.signOut();
       this.$router.push({ name: "home" });
+    },
+    // emitで受け取ったイベントのメソッド
+    switchMenuState(currentState) {
+      this.menuExpanded = !currentState;
     }
   }
 };
