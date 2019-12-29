@@ -33,6 +33,11 @@ export default {
     authService.onStateChanged(user => {
       this.user = user;
     });
+    // ページ遷移する前に実行すること
+    this.$router.beforeEach((to, from, next) => {
+      this.menuExpanded = false;
+      next();
+    });
   },
   methods: {
     async signOut() {
