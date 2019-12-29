@@ -7,14 +7,17 @@
     <p class="control" :class="{ 'has-icons-left': icon }">
       <input
         class="input"
+        :class="{ 'is-danger': error }"
         :type="type"
         :placeholder="placeholder"
+        @change="onChanged"
         :value="value"
         @input="input"
       />
       <!-- アイコンが指定されたときだけ表示 -->
       <pm-icon v-if="icon" class="is-small is-left" :name="icon"></pm-icon>
     </p>
+    <p class="help is-danger" v-if="error">{{ error }}</p>
   </div>
 </template>
 
@@ -57,6 +60,10 @@ export default {
       if (e.target.value !== this.value) {
         this.$emit("input", e.target.value);
       }
+    },
+    onChanged(e) {
+      // changeイベントを発火し入力値をパラメータとして送信
+      this.$emit("change", e.target.value);
     }
   }
 };
