@@ -4,12 +4,24 @@
     <pm-page-title title="サインイン"></pm-page-title>
     <section class="section">
       <form class="container">
-        <pm-text-field type="email" placeholder="メールアドレス" icon="envelope" v-model="email"></pm-text-field>
-        <pm-text-field type="password" placeholder="パスワード" icon="lock" v-model="password"></pm-text-field>
+        <pm-text-field
+          type="email"
+          placeholder="メールアドレス"
+          icon="envelope"
+          v-model="email"
+        ></pm-text-field>
+        <pm-text-field
+          type="password"
+          placeholder="パスワード"
+          icon="lock"
+          v-model="password"
+        ></pm-text-field>
         <div class="field is-grouped">
           <p class="control">
             <!-- submitボタンのデフォルトの挙動を制御 -->
-            <button class="button is-primary" @click.prevent="signIn">サインイン</button>
+            <button class="button is-primary" @click.prevent="signIn">
+              サインイン
+            </button>
           </p>
         </div>
       </form>

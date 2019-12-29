@@ -4,12 +4,24 @@
     <pm-page-title title="サインアップ"></pm-page-title>
     <section class="section">
       <form class="container">
-        <pm-text-field type="email" placeholder="メールアドレス" icon="envelope" v-model="email"></pm-text-field>
-        <pm-text-field type="password" placeholder="パスワード" icon="lock" v-model="password"></pm-text-field>
+        <pm-text-field
+          type="email"
+          placeholder="メールアドレス"
+          icon="envelope"
+          v-model="email"
+        ></pm-text-field>
+        <pm-text-field
+          type="password"
+          placeholder="パスワード"
+          icon="lock"
+          v-model="password"
+        ></pm-text-field>
         <div class="field">
           <p class="control">
             <!-- submitボタンのデフォルトの挙動を制御 -->
-            <button class="button is-primary" @click.prevent="signUp">サインアップ</button>
+            <button class="button is-primary" @click.prevent="signUp">
+              サインアップ
+            </button>
           </p>
         </div>
       </form>
@@ -22,6 +34,7 @@ import pmPageTitle from "@/components/PageTitle";
 import pmTextField from "@/components/TextField";
 
 import { authService } from "@/services/AuthService";
+import { userService } from "@/services/UserService";
 
 export default {
   name: "sign_up",
@@ -41,6 +54,10 @@ export default {
       authService
         // ユーザーの新規作成処理
         .signUp(this.email, this.password)
+        // ページ遷移前に登録処理を実行する
+        .then(credential => {
+          return userService.createUser(credential.user);
+        })
         .then(() => {
           // 成功したらTOPページへ遷移
           this.$router.push({ name: "home" });
