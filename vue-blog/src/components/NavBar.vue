@@ -1,5 +1,10 @@
 <template>
-  <nav id="nav" class="navbar has-shadow" role="navigation" aria-label="main navigation">
+  <nav
+    id="nav"
+    class="navbar has-shadow"
+    role="navigation"
+    aria-label="main navigation"
+  >
     <div class="container">
       <div class="navbar-brand">
         <router-link to="/" class="navbar-item">Vue-blog</router-link>
@@ -18,8 +23,16 @@
           <span aria-hidden="true"></span>
         </a>
       </div>
-      <div id="navbar-links" class="navbar-menu" :class="{ 'is-active': menuExpanded }">
+      <div
+        id="navbar-links"
+        class="navbar-menu"
+        :class="{ 'is-active': menuExpanded }"
+      >
         <div class="navbar-end" v-if="user">
+          <router-link :to="{ name: 'bookmark_new' }" class="navbar-item">
+            <pm-icon name="bookmark"></pm-icon>
+            <span>ブックマークする</span>
+          </router-link>
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
               <pm-icon name="user"></pm-icon>
@@ -52,7 +65,6 @@
     </div>
   </nav>
 </template>
-
 
 <script>
 import pmIcon from "./Icon";

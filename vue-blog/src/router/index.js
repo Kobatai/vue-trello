@@ -4,6 +4,7 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import SignUp from "../views/SignUp";
 import SignIn from "../views/SignIn";
+import BookmarkNew from "../views/BookmarkNew";
 
 Vue.use(Router);
 
@@ -25,6 +26,11 @@ export default new Router({
       path: "/sign_in",
       name: "sing_in",
       component: SignIn
+    },
+    {
+      path: "/bookmarks/new",
+      name: "bookmark_new",
+      component: BookmarkNew
     }
   ]
 });
