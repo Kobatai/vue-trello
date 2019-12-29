@@ -10,7 +10,7 @@
           v-model="title"
         ></pm-text-field>
         <pm-text-field
-          type="usl"
+          type="url"
           placeholder="URL"
           :error="urlError"
           @change="validateUrl"
@@ -63,8 +63,14 @@ export default {
         this.titleError = "タイトルは50文字までです。";
       }
     },
-    validateCpmment(comment) {
-      // コメントがあって150以上ならエラー文、そうじゃなければnull
+    validateUrl(url) {
+      this.urlError = null;
+      if (!url) {
+        this.urlError = "URLは必須です";
+      }
+    },
+    validateComment(comment) {
+      // コメントがあって150文字以上ならエラー文、そうじゃなければnull
       this.commentError =
         comment && comment.length > 150 ? "コメントは150文字までです" : null;
     }

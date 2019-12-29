@@ -43,7 +43,8 @@ export default {
     },
     placeholder: String,
     value: String,
-    icon: String
+    icon: String,
+    error: String
   },
   // computed: {
   //   innerValue: {
