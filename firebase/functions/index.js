@@ -1,5 +1,4 @@
 const functions = require("firebase-functions");
-
 // Firestoreからデータを取得するため
 const admin = require("firebase-admin");
 // regionの指定
@@ -41,7 +40,7 @@ exports.syncBookmark = fns.firestore
       });
     } else {
       // すでに存在している場合
-      let bookmark = {}:
+      let bookmark = {};
       bookmarkSnapshot.forEach(doc => {
         bookmark.data = doc.data();
         bookmark.id = doc.id;
@@ -58,5 +57,10 @@ exports.syncBookmark = fns.firestore
         })
       );
       // commentsサブコレクションに新規登録する
+      commentsRef.add({
+        userId: context.params.userId,
+        comment: userBookmark.comment,
+        commentedAt: userBookmark.bookmarkedAt
+      });
     }
   });
