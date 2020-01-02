@@ -3,6 +3,7 @@ import firebase from "./firebase";
 
 class UserService {
   constructor() {
+    this.auth = firebase.auth();
     this.db = firebase.firestore();
   }
 
