@@ -13,10 +13,13 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
+// dayjs を使用
 import dayjs from "dayjs";
+
 export default {
   name: "pm-bookmark-card",
   props: {
@@ -27,6 +30,7 @@ export default {
   },
   computed: {
     timestamp() {
+      // dayjs を利用して Date オブジェクトをフォーマットする
       return dayjs(this.createdAt).format("YYYY-MM-DD HH:mm");
     }
   }
