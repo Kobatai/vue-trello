@@ -10,6 +10,17 @@
         ></pm-bookmark-card>
       </div>
     </div>
+    <div class="columns">
+      <div class="column is-12">
+        <button
+          class="button is-rounded is-fullwidth"
+          v-if="hasNext"
+          @click="loadNextBookmarks"
+        >
+          もっとみる
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,7 +37,8 @@ export default {
     return {
       // ブックマークデータの受け口
       bookmarks: [],
-      user: null
+      user: null,
+      hasNext: false
     };
   },
   // ライフサイクルフック
@@ -39,6 +51,22 @@ export default {
     // ブックマークを取得し設定
     const bookmarks = await bookmarkService.getBookmarks(30);
     this.bookmarks = bookmarks;
+    // 初期データを30件取得できない場合は次のページはないと判断
+    this.hasNext = this.bookmarks.length === 30;
+  },
+  methods: {
+    // データ追加処理
+    async loadNextBookmarks() {
+      // 最後のブックマークの作成日以降のデータを取得
+      const nextBookmarks = await bookmarkService.getBookmarks(
+        30,
+        this.bookmarks[this.bookmarks.length - 1].createdAt
+      );
+      // 30件取得できない場合、次のページはないと判断する
+      this.hasNext = nextBookmarks.length === 30;
+      // dataに追加
+      this.bookmarks.push(...nextBookmarks);
+    }
   }
 };
 </script>

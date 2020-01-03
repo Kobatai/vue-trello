@@ -5,9 +5,14 @@ class BookmarkService {
     this.db = firebase.firestore();
   }
 
-  async getBookmarks(num) {
-    const snapshot = await this.db
-      .collection("bookmarks")
+  async getBookmarks(num, time) {
+    let ref = this.db.collection("bookmarks");
+    // 日時が渡されたときは指定日以降のデータを取得
+    if (time) {
+      ref = ref.where("createdAt", "<", time);
+    }
+
+    const snapshot = await ref
       .orderBy("createdAt", "desc")
       .limit(num)
       .get();
