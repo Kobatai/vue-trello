@@ -3,6 +3,7 @@
     <div class="columns is-multiline bookmarks">
       <div class="column is-4" v-for="b in bookmarks" :key="b.id">
         <pm-bookmark-card
+          :id="b.id"
           :url="b.url"
           :title="b.title"
           :userCount="b.userCount"
