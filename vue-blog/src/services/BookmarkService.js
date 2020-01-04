@@ -71,6 +71,22 @@ class BookmarkService {
     }
     return comments;
   }
+
+  // スター登録ロジック
+  async addStar(bookmarkId, commentId, userId) {
+    const commentRef = this.db
+      .collection("bookmarks")
+      .doc(bookmarkId)
+      .collection("comments")
+      .doc(commentId);
+
+    const comment = await commentRef.get();
+    // すでにスターの配列があればそれを使用、なければ空の配列を用意
+    const stars = comment.data().stars || [];
+    stars.push(userId);
+    // 特定のフィールドを更新するためにはupdateに更新するフィールドだけを設定したオブジェクトを渡す
+    return commentRef.update({ stars: stars });
+  }
 }
 const bookmarkService = new BookmarkService();
 export { bookmarkService };
