@@ -38,6 +38,10 @@
               <pm-icon name="user"></pm-icon>
             </a>
             <div class="navbar-dropdown is-right">
+              <router-link class="navbar-item" :to="{ name: 'profile' }">
+                <pm-icon name="address-card"></pm-icon>
+                <span>プロファイル</span>
+              </router-link>
               <a class="navbar-item" @click="signOut">
                 <pm-icon name="sign-out-alt"></pm-icon>
                 <span>サインアウト</span>
