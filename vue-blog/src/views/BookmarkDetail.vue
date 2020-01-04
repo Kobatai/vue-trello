@@ -18,6 +18,10 @@
         :avatar-url="c.user.avatarUrl || c.user.gravatarUrl"
         :user-name="c.user.name"
         :comment="c.comment"
+        :commentId="c.id"
+        :stars="c.stars"
+        :show-add-button="isSignedIn"
+        @add-star="addStar"
       ></pm-user-comment>
     </section>
   </div>
@@ -25,7 +29,9 @@
 
 <script>
 import pmUserComment from "@/components/UserComment";
+import { authService } from "@/services/AuthService";
 import { bookmarkService } from "@/services/BookmarkService";
+import { userService } from "@/services/UserService";
 
 export default {
   name: "bookmark_detail",
@@ -33,10 +39,14 @@ export default {
   data() {
     return {
       bookmark: null,
-      comments: null
+      comments: null,
+      isSignedIn: false
     };
   },
   async created() {
+    authService.onStateChanged(u => {
+      this.isSignedIn = u != null;
+    });
     // ルーティングからパラメータを取得
     const bookmarkId = this.$route.params.id;
     this.bookmark = await bookmarkService.getBookmark(bookmarkId);
@@ -45,6 +55,16 @@ export default {
       this.$router.push({ name: "error_not_found" });
     }
     this.comments = await bookmarkService.getBookmarkComments(bookmarkId);
+  },
+  methods: {
+    async addStar(commentId) {
+      if (this.isSignedIn) {
+        const user = await userService.getCurrentUser();
+        const bookmarkId = this.$route.params.id;
+        await bookmarkService.addStar(bookmarkId, commentId, user.id);
+        this.comments = await bookmarkService.getBookmarkComments(bookmarkId);
+      }
+    }
   }
 };
 </script>
