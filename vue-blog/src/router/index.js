@@ -6,6 +6,7 @@ import SignUp from "../views/SignUp";
 import SignIn from "../views/SignIn";
 import BookmarkNew from "../views/BookmarkNew";
 import Error404 from "../views/Error404";
+import BookmarkDetail from "../views/BookmarkDetail";
 
 Vue.use(Router);
 
@@ -32,6 +33,12 @@ export default new Router({
       path: "/bookmarks/new",
       name: "bookmark_new",
       component: BookmarkNew
+    },
+    {
+      // :idとすることでidをパラメータとしている
+      path: "/bookmarks/:id",
+      name: "bookmark_detail",
+      component: BookmarkDetail
     },
     {
       path: "/not_found",
