@@ -1,5 +1,6 @@
 import gravatar from "gravatar";
 import firebase from "./firebase";
+import { cacheService } from "./CacheService";
 
 class UserService {
   constructor() {
@@ -37,6 +38,29 @@ class UserService {
     // users コレクションに登録する
     await this.db.collection("users").add(user);
     return user;
+  }
+
+  // キャッシュからユーザー一覧を取得するロジック
+  async getUser(userId) {
+    const users = cacheService.getItem("users") || {};
+    // 特定のIDのユーザーが登録されていなければ新規に取得
+    if (!users[userId]) {
+      const userRef = await this.db
+        .collection("users")
+        .doc(userId)
+        .get();
+      let user = null;
+      if (userRef.exists) {
+        user = {
+          ...userRef.data(),
+          id: userId
+        };
+      }
+      // ユーザー一覧に取得したユーザーを設定しキャッシュに登録する
+      users[userId] = user;
+      cacheService.setItem("users", users);
+    }
+    return users[userId];
   }
 }
 
