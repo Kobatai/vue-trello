@@ -35,7 +35,7 @@ import { userService } from "@/services/UserService";
 
 export default {
   name: "bookmark_detail",
-  componets: { pmUserComment },
+  components: { pmUserComment },
   data() {
     return {
       bookmark: null,

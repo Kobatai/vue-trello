@@ -54,7 +54,7 @@ class BookmarkService {
       .collection("comments")
       .get();
     const comments = [];
-    for (let doc of snapshot.doc) {
+    for (let doc of snapshot.docs) {
       const userId = doc.data().userId;
       const user = await this.db
         .collection("users")
