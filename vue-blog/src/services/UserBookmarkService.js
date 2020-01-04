@@ -37,6 +37,25 @@ class UserBookmarkService {
       .collection("bookmarks")
       .add(form);
   }
+
+  // ユーザーのブックマーク取得ロジック
+  async getBookmarks(user) {
+    const snapshot = await this.db
+      .collection("users")
+      .doc(user.id)
+      .collection("bookmarks")
+      .orderBy("bookmarkedAt", "desc")
+      .get();
+
+    return snapshot.docs.map(doc => {
+      return {
+        ...doc.data(),
+        // firestore.Timestampをjs標準の形に変換
+        bookmarkedAt: doc.data().bookmarkedAt.toDate(),
+        id: doc.id
+      };
+    });
+  }
 }
 
 const userBookmarkService = new UserBookmarkService();

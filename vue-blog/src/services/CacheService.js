@@ -1,10 +1,10 @@
 class CacheService {
   getItem(key) {
     const value = localStorage.getItem(key);
-    // ローカルストレージには文字列でデータを保存するのでJSON形式に復元する
     // ローカルストレージはユーザーのローカル環境のブラウザにデータを保存できるもので永続的
     // sessionStorageはウィンドウを閉じるまで
     // クッキーは指定期限まで
+    // ローカルストレージには文字列でデータを保存するのでJSON形式に復元する
     return value != null ? JSON.parse(value) : null;
   }
 
