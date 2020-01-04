@@ -15,6 +15,7 @@
 <script>
 // firebaseのサービスクラスをインポート(@は同じディレクトリであるapp/vue-blog/srcという意味)
 import { authService } from "@/services/AuthService";
+import { cacheService } from "@/services/CacheService";
 
 import pmNavBar from "@/components/NavBar";
 
@@ -30,6 +31,8 @@ export default {
   },
   // vueインスタンス作成時にfirebaseでログインしていればuserに値をセット
   created() {
+    // ユーザーのキャッシュを削除
+    cacheService.removeItem("users");
     authService.onStateChanged(user => {
       this.user = user;
     });

@@ -21,12 +21,7 @@
             <pm-icon class="is-small" mode="far" name="star"></pm-icon>
           </button>
           <!-- スターの数だけ表示 -->
-          <pm-icon
-            name="star"
-            class="is-small has-text-info"
-            v-for="s in stars"
-            :key="s"
-          ></pm-icon>
+          <pm-star v-for="s in stars" :key="s" :userId="s"></pm-star>
         </div>
       </nav>
     </div>
@@ -35,10 +30,11 @@
 
 <script>
 import pmIcon from "./Icon";
+import pmStar from "./Star";
 
 export default {
   name: "pm-user-comment",
-  components: { pmIcon },
+  components: { pmIcon, pmStar },
   props: {
     avatarUrl: String,
     userName: String,
