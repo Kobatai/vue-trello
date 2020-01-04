@@ -5,6 +5,7 @@ import Home from "../views/Home.vue";
 import SignUp from "../views/SignUp";
 import SignIn from "../views/SignIn";
 import BookmarkNew from "../views/BookmarkNew";
+import Error404 from "../views/Error404";
 
 Vue.use(Router);
 
@@ -31,6 +32,16 @@ export default new Router({
       path: "/bookmarks/new",
       name: "bookmark_new",
       component: BookmarkNew
+    },
+    {
+      path: "/not_found",
+      name: "error_not_found",
+      component: Error404
+    },
+    {
+      path: "*",
+      name: "error_unknown_path",
+      component: Error404
     }
   ]
 });
