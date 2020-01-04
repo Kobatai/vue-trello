@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!-- Bulmaのcdn -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
     />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <!-- Bulma Extensions の CSS を読み込み -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css"
+    />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title>vue-blog</title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but vue-blog doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but vue-blog doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
+      >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
 
     <!-- fontawesomeのcdn -->
     <script
-    defer
-    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/js/all.js"
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/js/all.js"
     ></script>
+    <!-- Bulma Extensions の JavaScript を読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/js/bulma-extensions.min.js"></script>
   </body>
 </html>
