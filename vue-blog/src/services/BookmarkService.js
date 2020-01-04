@@ -27,6 +27,50 @@ class BookmarkService {
       };
     });
   }
+
+  async getBookmark(id) {
+    if (id == null) {
+      return null;
+    }
+
+    const snapshot = await this.db
+      .collection("bookmarks")
+      .doc(id)
+      .get();
+    if (snapshot.exists) {
+      return {
+        // snapshotを展開してコピーする
+        ...snapshot.data(),
+        id: id
+      };
+    }
+    return null;
+  }
+
+  async getBookmarkComments(id) {
+    const snapshot = await this.db
+      .collection("bookmarks")
+      .doc(id)
+      .collection("comments")
+      .get();
+    const comments = [];
+    for (let doc of snapshot.doc) {
+      const userId = doc.data().userId;
+      const user = await this.db
+        .collection("users")
+        .doc(userId)
+        .get();
+      comments.push({
+        ...doc.data(),
+        id: doc.id,
+        user: {
+          ...user.data(),
+          id: userId
+        }
+      });
+    }
+    return comments;
+  }
 }
 const bookmarkService = new BookmarkService();
 export { bookmarkService };
