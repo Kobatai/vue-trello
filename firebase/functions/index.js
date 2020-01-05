@@ -147,3 +147,37 @@ exports.testBookmarks = fns.https.onRequest(async (req, res) => {
   // 結果として作成件数を含めたレスポンスを返す
   res.status(200).send(`${result.length} bookmarks are created successfully.`);
 });
+
+// 一度に処理する件数
+// Firebase では500 を超えるドキュメントのコレクションを削除するには、複数回の書き込みバッチ オペレーションまたは数百回の単純削除が必要
+const limitSize = 500;
+
+// ユーザーデータの削除関数
+exports.removeUserData = fns.auth.user().onDelete(async user => {
+  const snapshot = await db
+    .collection("users")
+    .where("authId", "==", user.uid)
+    .get();
+  const ref = snapshot.docs[0].ref;
+
+  // ユーザーのブックマークを削除する関数
+  const deleteQueryBatch = async q => {
+    const snapshot = await q.get();
+    if (snapshot.empty) {
+      // 全て削除したら終了
+      return;
+    }
+    const batch = admin.firestore().batch();
+    snapshot.forEach(doc => {
+      batch.delete(doc.ref);
+    });
+    await batch.commit();
+    // 全て削除するため再帰処理
+    await deleteQueryBatch(q);
+  };
+  const query = ref.collection("bookmarks").limit(limitSize);
+  await deleteQueryBatch(query);
+
+  // 最後にユーザーのデータを削除
+  await ref.delete();
+});

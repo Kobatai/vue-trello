@@ -15,6 +15,14 @@
               編集
             </button>
           </div>
+          <div class="column">
+            <button
+              class="button is-small is-primary is-outlined is-fullwidth"
+              @click="showRetireModal"
+            >
+              退会
+            </button>
+          </div>
         </div>
       </div>
       <div class="column is-for-fifths">
@@ -43,6 +51,11 @@
       :name="profile.name"
       @update="updateProfile"
     ></pm-profile-edit-modal>
+    <pm-retire-modal
+      v-if="profile"
+      v-model="retireModalActive"
+      @retire="retire"
+    ></pm-retire-modal>
   </div>
 </template>
 
@@ -54,10 +67,11 @@ import { userBookmarkService } from "@/services/UserBookmarkService";
 import { storageService } from "@/services/StorageService";
 
 import pmProfileEditModal from "@/components/ProfileEditModal";
+import pmRetireModal from "@/components/RetireModal";
 
 export default {
   name: "profile",
-  components: { pmProfileEditModal },
+  components: { pmProfileEditModal, pmRetireModal },
   data() {
     return {
       user: null,
@@ -81,6 +95,9 @@ export default {
     showProfileEditModal() {
       this.editProfileModalActive = true;
     },
+    showRetireModal() {
+      this.retireModalActive = true;
+    },
     // プロファイル更新処理
     async updateProfile(val) {
       const data = { name: val.name };
@@ -100,6 +117,16 @@ export default {
       if (val.teardown) {
         val.teardown();
       }
+    },
+    // 退会処理
+    async retire(val) {
+      await authService.retire(val.password);
+      this.retireModalActive = false;
+      // 退会後はサインアウト
+      await authService.signOut();
+      // thanksページに遷移
+      // this.$router を使用しないのは退会という処理の都合上いったん状態をリセットした方が都合がいいから
+      window.location.href = "/thanks";
     },
     formatTime(dateTime) {
       return dayjs(dateTime).format("YYYY-MM-DD HH:mm");
