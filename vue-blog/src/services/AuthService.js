@@ -23,20 +23,31 @@ class AuthService {
 
   // 認証情報更新処理
   async update(currentPassword, email, password) {
-    const user = this.auth.currentUser;
-    // ユーザーの認証情報を現在のアドレスとPWで取得する
-    const credential = firebase.auth.EmailAuthProvider.credential(
-      user.email,
-      currentPassword
-    );
-    // 再度認証を行う
-    await user.reauthenticateWithCredential(credential);
+    // 再認証の部分を共通処理として別メソッドにしたので変更
+    const user = await this.reauthenticate(currentPassword);
     if (email) {
       await user.updateEmail(email);
     }
     if (password) {
       await user.updatePassword(password);
     }
+  }
+
+  // 認証情報を削除することで退会処理とする
+  async retire(password) {
+    const user = await this.reauthenticate(password);
+    await user.delete();
+  }
+
+  // 再認証処理
+  async reauthenticate(password) {
+    const user = this.auth.currentUser;
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      user.email,
+      password
+    );
+    user.reauthenticateWithCredential(credential);
+    return user;
   }
 }
 
