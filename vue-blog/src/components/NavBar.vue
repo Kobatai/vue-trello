@@ -42,6 +42,10 @@
                 <pm-icon name="address-card"></pm-icon>
                 <span>プロファイル</span>
               </router-link>
+              <router-link class="navbar-item" :to="{ name: 'auth_edit' }">
+                <pm-icon name="user-edit"></pm-icon>
+                <span>認証情報変更</span>
+              </router-link>
               <a class="navbar-item" @click="signOut">
                 <pm-icon name="sign-out-alt"></pm-icon>
                 <span>サインアウト</span>

@@ -7,6 +7,7 @@ import SignIn from "../views/SignIn";
 import BookmarkNew from "../views/BookmarkNew";
 import BookmarkDetail from "../views/BookmarkDetail";
 import Profile from "../views/Profile";
+import AuthEdit from "../views/AuthEdit";
 
 // エラー周り
 import Error404 from "../views/Error404";
@@ -52,6 +53,12 @@ const router = new Router({
       path: "/profile",
       name: "profile",
       component: Profile,
+      meta: { private: true }
+    },
+    {
+      path: "/auth/edit",
+      name: "auth_edit",
+      component: AuthEdit,
       meta: { private: true }
     },
     {
