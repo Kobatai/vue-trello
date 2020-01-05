@@ -8,6 +8,7 @@ import BookmarkNew from "../views/BookmarkNew";
 import BookmarkDetail from "../views/BookmarkDetail";
 import Profile from "../views/Profile";
 import AuthEdit from "../views/AuthEdit";
+import Thanks from "../views/Thanks";
 
 // エラー周り
 import Error404 from "../views/Error404";
@@ -60,6 +61,11 @@ const router = new Router({
       name: "auth_edit",
       component: AuthEdit,
       meta: { private: true }
+    },
+    {
+      path: "/thanks",
+      name: "thanks",
+      component: Thanks
     },
     {
       path: "/not_found",
