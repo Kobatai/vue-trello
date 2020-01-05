@@ -62,6 +62,12 @@ class UserService {
     }
     return users[userId];
   }
+
+  // ユーザー更新処理
+  async updateUser(userId, data) {
+    const ref = await this.db.collection("users").doc(userId);
+    return ref.update(data);
+  }
 }
 
 const userService = new UserService();

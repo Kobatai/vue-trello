@@ -7,6 +7,7 @@ class StorageService {
 
   async uploadAvatar(userId, file) {
     const path = `users/${userId}/${file.name}`;
+    // パスを指定してファイルをputメソッドに渡せばFirebase Storageにアップロードできる
     const snapshot = await this.ref.child(path).put(file);
 
     // 作成したファイルのURLを保持するためURLを取得して返す

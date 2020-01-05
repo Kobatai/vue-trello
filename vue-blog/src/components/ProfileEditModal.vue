@@ -92,7 +92,7 @@ export default {
       // updateイベントを発行
       this.$emit("update", {
         name: this.userName,
-        file: this.avatarFile
+        file: this.avatarFile,
         // 正常終了後の後処理を teardown として渡し
         // 名前だけ更新後のものにしてモーダルダイアログを非表示する
         teardown: () => {
