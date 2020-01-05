@@ -120,6 +120,7 @@ export default {
     },
     // 退会処理
     async retire(val) {
+      // エンドユーザーの情報のみ削除、ユーザーが持ってたbookmarkやプロファイルなどはここでは削除しない
       await authService.retire(val.password);
       this.retireModalActive = false;
       // 退会後はサインアウト
