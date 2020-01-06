@@ -1,14 +1,17 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
+
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC1BddaUpP-jV3MRQslo_3xM0aXR3JpcR0",
-  authDomain: "vue-blog-852c7.firebaseapp.com",
-  databaseURL: "https://vue-blog-852c7.firebaseio.com",
-  projectId: "vue-blog-852c7",
-  storageBucket: "vue-blog-852c7.appspot.com",
-  messagingSenderId: "189220770256",
-  appId: "1:189220770256:web:99949069f9aa84fe0d29d5",
-  measurementId: "G-1MTQ20VXJW"
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID
 };
 // 設定情報でFirebaseライブラリを初期化
 firebase.initializeApp(firebaseConfig);
