@@ -43,7 +43,7 @@ export default {
     };
   },
   computed: {
-    acrive: {
+    active: {
       get() {
         return this.value;
       },
